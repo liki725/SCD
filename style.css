@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+}
+
+body.lightTheme::-webkit-scrollbar-thumb {
+    background-color: #000;
+}
+
+body.darkTheme::-webkit-scrollbar-thumb {
+    background-color: #FFF;
+}
+
+
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    padding: 0 20px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border-radius: 0 0 25% 25%;
+    border: 3px solid transparent;
+    animation: borderAnimation 5s linear infinite;
+
+    &:hover h1 {
+        letter-spacing: 17px;
+    }
+
+    h1 {
+        font-size: 3rem;
+        text-align: center;
+        letter-spacing: 10px;
+        transition: letter-spacing 0.5s .25s linear;
+        user-select: none;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-height: 100%;
+    padding: 20px;
+    gap: 20px;
+
+
+    aside {
+        flex: 0 0 10%;
+        height: 100%;
+        border-radius: 30px;
+        border: 3px solid transparent;
+        animation: borderAnimation 5s linear infinite;
+
+        div.category {
+            width: 100%;
+            height: 25px;
+            transition: all 0.25s 0ms ease-in;
+            border-radius: 5px;
+        }
+
+        div.category:not(.first) {
+            margin-top: 20px;
+        }
+
+        div.category.first {
+            margin-top: 5px;
+        }
+
+        div.category:hover:not(.disabled) {
+            transform: scale(1.1);
+            background-color: #ff007f;
+            box-shadow: 0 0 15px 10px rgba(255, 0, 127, 0.6);
+        }
+    }
+}
+
+aside div.category p.active,
+header h1 {
+    background: linear-gradient(45deg, #ff007f, #7f00ff, #00bcd4, #ffeb3b, #fff);
+    background-size: 200% 200%;
+    background-clip: text;
+    color: transparent;
+    animation: gradientAnimation 5s linear infinite alternate;
+}
+
+aside div.category p {
+    font-size: 1.25rem;
+    text-align: center;
+    letter-spacing: 5px;
+    line-height: 25px;
+    cursor: pointer;
+    user-select: none;
+
+    &.active {
+        position: relative;
+
+        &::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(45deg, #ff007f, #7f00ff, #00bcd4, #ffeb3b, #fff);
+            background-size: 200% 200%;
+            animation: gradientAnimation 5s linear infinite alternate, lineAnimation 1s ease-out 1 forwards;
+            transform: translateX(-50%);
+            transform-origin: center;
+        }
+    }
+}
+
+main div.info {
+    flex: 0 0 90%;
+    border-radius: 30px;
+    border: 3px solid transparent;
+    animation: borderAnimation 5s linear infinite;
+    padding: 15px 50px;
+}
+
+main div.info h2,
+main div.info h1 {
+    text-align: center;
+    letter-spacing: 6px;
+    color: transparent;
+    background: linear-gradient(45deg, #ff007f, #7f00ff, #00bcd4, #ffeb3b, #fff);
+    background-size: 200% 200%;
+    background-clip: text;
+    animation: gradientAnimation 5s linear infinite alternate;
+}
+
+main div.info h2 {
+    font-size: 2.5rem;
+}
+
+main div.info h1 {
+    font-size: 3rem;
+}
+
+main div.info dt,
+main div.info h3 {
+    font-size: 1.7rem;
+    color: transparent;
+    background: linear-gradient(45deg, #ff007f, #7f00ff, #00bcd4, #ffeb3b, #fff);
+    background-size: 200% 200%;
+    background-clip: text;
+    animation: gradientAnimation 5s linear infinite alternate;
+    margin-top: 20px;
+}
+
+main div.info div.Can,
+main div.info h2 {
+    margin-top: 80px;
+}
+
+main div.info p {
+    margin: 20px;
+    display: inline;
+}
+
+main div.info dd {
+    margin-top: 35px;
+    font-size: 1.7rem;
+    line-height: 40px;
+    text-align: left;
+}
+
+main div.info u:not(.InText) {
+    margin-left: 15px;
+}
+
+main div.info i.note {
+    color: yellowgreen;
+}
+
+
+main div.info div.Can,
+main div.info div.Example,
+main div.info div.IntelType {
+    margin-top: 100px;
+}
+
+main div.info span {
+    font-size: 2rem;
+    display: inline-block;
+}
+
+main div.info span:not(.isolate) {
+    color: #ff6347;
+    animation: colorChange 5s ease-in-out infinite alternate, swingAnimation 2s linear infinite;
+}
+
+main div.info span.isolate {
+    color: white;
+    font-size: 1.75rem;
+}
+
+.check path {
+    stroke-dasharray: 30;
+    /* Длина штрихов (длина пути галочки) */
+    stroke-dashoffset: 30;
+    /* Смещение штрихов (начинаем с полного смещения) */
+    animation: drawCheck 1s 0ms ease infinite alternate;
+}
+
+svg.cross {
+    animation: rotateCross 2s 0ms ease-in-out infinite forwards;
+    transform-origin: center;
+}
+
+
+@keyframes rotateCross {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes drawCheck {
+    from {
+        stroke-dashoffset: 30;
+        /* Начальное состояние: путь скрыт */
+    }
+
+    to {
+        stroke-dashoffset: 0;
+        /* Конечное состояние: путь полностью отрисован */
+    }
+}
+
+@keyframes borderAnimation {
+    0% {
+        border-color: #ff007f;
+    }
+
+    25% {
+        border-color: #7f00ff;
+    }
+
+    50% {
+        border-color: #00bcd4;
+    }
+
+    75% {
+        border-color: #ffeb3b;
+    }
+
+    100% {
+        border-color: #ff007f;
+    }
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes lineAnimation {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 75%;
+    }
+}
+
+@keyframes swingAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-15deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: #ff6347;
+    }
+
+    25% {
+        color: #32cd32;
+    }
+
+    50% {
+        color: #00bfff;
+    }
+
+    75% {
+        color: #ff4500;
+    }
+
+    100% {
+        color: #ffffff;
+    }
+}
+
+
+
+
+
+@media (max-width: 960px) {
+    header {
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 6px;
+        }
+
+        &:hover h1 {
+            letter-spacing: 10px;
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    header {
+        h1 {
+            letter-spacing: 3px;
+        }
+
+        &:hover h1 {
+            letter-spacing: 7.5px;
+        }
+    }
+}
+
+
+@media (max-width: 712px) {
+    body {
+        padding: 0 10px;
+    }
+
+    main {
+        padding: 20px 10px;
+        gap: 15px;
+
+        div.info {
+            flex: 1;
+            min-width: 0;
+            padding: 5px 20px;
+
+            h1 {
+                font-size: 2.35rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            dd {
+                font-size: 1.4rem;
+                line-height: 30px;
+            }
+        }
+
+        aside {
+            min-width: 110px;
+        }
+    }
+}
+
+@media (max-width: 540px) {
+
+    header {
+        h1 {
+            font-size: 2rem;
+        }
+    }
+
+    body {
+        padding: 0 5px;
+    }
+
+    main {
+        padding: 20px 5px;
+        gap: 10px;
+
+        div.info {
+            padding: 5px 15px;
+        }
+
+        aside {
+            min-width: 100px;
+        }
+    }
+}
+
+@media (max-width: 420px) {
+
+        main {
+            flex-direction: column;
+
+            div.info {
+                order: 2;
+
+                h1 {
+                    font-size: 1.8rem;
+                }
+
+                h2 {
+                    font-size: 1.6rem;
+                }
+
+                dd {
+                    font-size: 1.2rem;
+                    line-height: 30px;
+                }
+
+                dd p,
+                dt p {
+                    font-size: 1.4rem;
+                }
+            }
+
+            aside {
+                order: 1;
+                width: 100%;
+
+                div.category {
+                    margin: 10px;
+                    display: inline-block;
+                    width: 25%;
+                    height: 20px;
+                }
+            }
+        }
+    }
