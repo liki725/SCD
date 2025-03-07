@@ -1,5 +1,5 @@
-import { allInfo } from '/modules/Info.js';
-import { dynamicStyles } from '/modules/themes.js';
+import { allInfo } from './modules/Info.js';
+import { dynamicStyles } from './modules/themes.js';
 
 const informationBlock = document.querySelector('div.info');
 const arrCategories = document.querySelectorAll('div.category');
